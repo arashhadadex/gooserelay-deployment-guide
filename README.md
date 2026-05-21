@@ -22,6 +22,10 @@ Forked version:
 
 https://github.com/T2HASH/gooserelayVpN
 
+You can also visit my website where i explained the step-by-step with details:
+
+https://datatodeploy.com/google-apps-script-vpn-tunnel/
+
 All source code credits belong to the original project creator and contributors.
 
 ## The path is as follows:
@@ -209,5 +213,120 @@ Expected response:
 ```
 {"ok":true}
 ```
+
+## Google Apps Script Setup
+1. Open https://script.google.com
+2. Create new project
+3. Paste Code.gs
+4. Deploy as Web app
+
+Settings:
+- Execute as: me
+- Access: anyone
+
+Result:
+```
+https://script.google.com/macros/s/XXXX/exec
+```
+
+## Multiple Deployments
+Important:
+- Multiple .gs files inside one project is NOT recommended.
+- Create separate Apps Script projectes instead.
+
+Recommended:
+```
+Project A → URL A
+Project B → URL B
+Project C → URL C
+```
+
+## Example Client Config
+```
+{
+  "socks_host": "0.0.0.0",
+  "socks_port": 1080,
+
+  "tunnel_key": "REPLACE_WITH_KEY",
+
+  "relay_urls": [
+    "https://script.google.com/macros/s/DEPLOYMENT_A/exec",
+    "https://script.google.com/macros/s/DEPLOYMENT_B/exec"
+  ]
+}
+```
+
+## SOCKS5 Usage
+Example for curl test:
+```
+curl --socks5-hostname 127.0.0.1:1080 https://example.com
+```
+
+## Safari / Browser Usage
+macOS:
+- System settings
+- Network
+- Wi-Fi
+- Details
+- Proxies
+- SOCKS5 Proxy
+
+Set:
+- Host: 127.0.0.1
+- Port: 1080
+
+## SOCKS Listener Not Reachable
+Verify:
+```
+lsof -nP -iTCP:1080 -sTCP:LISTEN
+```
+
+If sharing on LAN:
+```
+"socks_host": "0.0.0.0"
+```
+
+## Performance Expectations
+This architecture prioritizes:
+
+stealth,
+survivability,
+transport camouflage.
+
+It does NOT provide:
+
+low latency,
+gaming-grade performance,
+WireGuard-class throughput.
+
+Typical issues:
+
+long polling,
+Apps Script throttling,
+Google-side latency,
+occasional HTTP2 resets.
+
+## Security Notes
+
+Before deploying, I manually reviewd:
+
+subprocess execution, shell spawning, cryptography usage, nonce handling, AES-GCM implementation. 
+```
+grep -R "os/exec" .
+grep -R "exec.Command" .
+grep -R "NewGCM" .
+grep -R "crypto/rand" .
+```
+
+## Disclaimer
+This repository is for:
+
+- Educational purposes.
+- Networking research.
+- Deployment documentation.
+- Infrastructure experimentation.
+
+Users are responsible for complying with local laws and platform policies.
+
 
 
