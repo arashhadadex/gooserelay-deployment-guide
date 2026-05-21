@@ -130,6 +130,7 @@ relay.example.com {
 	reverse_proxy 127.17.0.1:8443
 
 }
+```
 
 Important:
 - `127.0.0.1` inside Docker containers points to the container itself.
