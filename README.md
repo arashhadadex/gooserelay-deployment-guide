@@ -22,9 +22,10 @@ Forked version:
 
 https://github.com/T2HASH/gooserelayVpN
 
-You can also visit my website where i explained the step-by-step with details:
-
+## You can also visit my website where i explained the step-by-step with details:
+```
 https://datatodeploy.com/google-apps-script-vpn-tunnel/
+```
 
 All source code credits belong to the original project creator and contributors.
 
